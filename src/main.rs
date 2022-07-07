@@ -1,3 +1,11 @@
+fn help() {
+    println!("This is help function - TODO(implement)!")
+}
+
+fn unknown_command(s: &mut String) {
+    println!("Unknown command: {}", s);
+}
+
 fn trim_newline(s: &mut String) {
     if s.ends_with('\n') {
         s.pop();
@@ -17,7 +25,12 @@ fn main() {
         line.clear();
         print!("RustREPL ->: ");
         let _ = std::io::stdout().flush();
-        let bytes = std::io::stdin().read_line(&mut line).unwrap();
+        let _bytes = std::io::stdin().read_line(&mut line).unwrap();
         trim_newline(&mut line);
+
+        match line.as_str() {
+            "help" => help(),
+            _ => unknown_command(&mut line)
+        }
     } 
 }
